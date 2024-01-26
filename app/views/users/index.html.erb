@@ -1,0 +1,47 @@
+<%= form_with model: @user, url: users_path, id: 'charge-form', class: 'transaction-form-wrap', data: { turbo: false }, local: true do |f| %>
+  <table class="detail-table">
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <th class="detail-user">名前</th>
+          <td class="detail-value"><%= user.name %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">ニックネーム</th>
+          <td class="detail-value"><%= user.nickname %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <% @comments.each do |comment| %>
+    <table class="detail-table">
+      <tbody>
+        <tr>
+          <th class="detail-user">生年月日</th>
+          <td class="detail-value"><%= comment.birthdate %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">強み</th>
+          <td class="detail-value"><%= comment.strengths %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">弱み</th>
+          <td class="detail-value"><%= comment.weaknesses %></td>
+        </tr>
+        <tr>
+          <th class="detail-user">メッセージ</th>
+          <td class="detail-value"><%= comment.message %></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class='user-photo-info'>
+      <% if comment.image.attached? %>
+        <%= image_tag comment.image, class: 'user-photo-img' %>
+      <% else %>
+        <%= image_tag 'test_image.jpg.jpg', class: 'user-photo-img', alt: 'Default Image' %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %> 

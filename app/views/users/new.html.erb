@@ -1,0 +1,44 @@
+<%= form_with model: @user, url: users_path, method: :post, id: 'charge-form', class: 'transaction-form-wrap', data: { turbo: false }, local: true do |f| %>
+      <div class="introduce">
+        <div class="introduce-right">
+          <!-- 写真もしくは画像を入力 -->
+          <span class="indispensable">(必須)</span>
+          <p>
+            クリックしてファイルをアップロード
+          </p>
+          <%= f.file_field :image, id: "comment-image" %>
+        </div>
+        <div class="introduce-main">
+
+            <label class="form-text">強み</label>
+            <span class="indispensable">(必須)</span>
+            <%= f.text_field :strengths, placeholder: "Strengths", class: "strengths-form" %>
+
+            <label class="form-text">弱み</label>
+            <span class="indispensable">(必須)</span>
+            <%= f.text_field :weaknesses, placeholder: "Weaknesses", class: "weaknesses-form" %>
+
+            <label class="form-text">生年月日</label>
+            <span class="indispensable">(必須)</span>
+            <div class='input-birth-wrap'>
+            <%= raw sprintf(
+              f.date_select(
+                    :birthdate,
+                    class:'select-birth',
+                    id:"birth-date",
+                    use_month_numbers: true,
+                    prompt:'--',
+                    start_year: 1930,
+                    end_year: (Time.now.year - 5),
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+            </div>
+
+            <label class="form-text">メッセージ</label>
+              <%= f.text_area :message, placeholder: "MESSAGE", class: "message-form" %>
+            </div>
+              <%= f.submit "SEND", class: "send" %>
+        
+         </div>
+       <% end %>
+
